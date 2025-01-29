@@ -1,6 +1,7 @@
-def print_numbers(num: int):
-    while num != 0:
-        print(num - 1)
-    print("finished!")
+def print_numbers(num: int): # функция с параметром только int
+    while num != 0: # пока num не равно нулю, выполнять блок кода
+        print(num) # и выводить значение num на экран
+        num = num - 1 # вычитая по единице при каждом выполнении блока кода
+    print("finished!") # по окончанию блока кода завершить функцию выводом на экран текста финиша
 
-print_numbers(5)
+print_numbers(4)
