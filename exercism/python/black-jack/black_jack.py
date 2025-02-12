@@ -89,8 +89,7 @@ def is_blackjack(card_one, card_two):
     if ('A' in card_one and value_of_card(card_two) == 10) or ('A' in card_two and value_of_card(card_one) == 10):
         return True
         
-    else:
-        return False
+    return False
 
 
 def can_split_pairs(card_one, card_two):
@@ -103,8 +102,7 @@ def can_split_pairs(card_one, card_two):
     if value_of_card(card_one) == value_of_card(card_two):
         return True
         
-    else:
-        return False
+    return False
 
 
 def can_double_down(card_one, card_two):
@@ -119,5 +117,4 @@ def can_double_down(card_one, card_two):
     if sum_of_cards in value_double_down:
         return True
         
-    else:
-        return False
+    return False
