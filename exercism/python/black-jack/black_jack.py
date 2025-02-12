@@ -30,6 +30,8 @@ def value_of_card(card):
         
     if card in numerical_card:
         return int(card)
+
+    return 0
    
 
 
@@ -53,6 +55,7 @@ def higher_card(card_one, card_two):
     if value_of_card(card_one) == value_of_card(card_two):
         return card_one, card_two
 
+    return 0
 
 def value_of_ace(card_one, card_two):
     """Calculate the most advantageous value for the ace card.
@@ -73,6 +76,8 @@ def value_of_ace(card_one, card_two):
         
     if value_of_card(card_one) + value_of_card(card_two) > 10: # сравнение суммы карт и возврат 1
         return 1
+
+    return 0
 
 
 def is_blackjack(card_one, card_two):
