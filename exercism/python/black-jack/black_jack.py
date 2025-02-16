@@ -45,17 +45,17 @@ def higher_card(card_one, card_two):
     2.  'A' (ace card) = 1
     3.  '2' - '10' = numerical value.
     """
+    value_1 = value_of_card(card_one)
+    value_2 = value_of_card(card_two)
 
-    if value_of_card(card_one) > value_of_card(card_two):
+    if value_1 > value_2:
         return card_one
         
-    if value_of_card(card_one) < value_of_card(card_two):
+    if value_1 < value_2:
         return card_two
-        
-    if value_of_card(card_one) == value_of_card(card_two):
-        return card_one, card_two
+    
+    return card_one, card_two
 
-    return 0
 
 def value_of_ace(card_one, card_two):
     """Calculate the most advantageous value for the ace card.
@@ -67,14 +67,15 @@ def value_of_ace(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand) УСЛОВИЕ НЕ ПОНЯЛ!!!
     3.  '2' - '10' = numerical value.
     """
+    sum_value = value_of_card(card_one) + value_of_card(card_two)
 
-    if 'A' in card_one or 'A' in card_two: # если туз уже в руках, то сразу возвращает 1 (такое условие согласно тестам кода)
+    if 'A' in (card_one, card_two): # если туз уже в руках, то сразу возвращает 1 (такое условие согласно тестам кода)
         return 1
         
-    if value_of_card(card_one) + value_of_card(card_two) <= 10: # сравнение суммы карт и возврат 11
+    if sum_value <= 10: # сравнение суммы карт и возврат 11
         return 11
         
-    if value_of_card(card_one) + value_of_card(card_two) > 10: # сравнение суммы карт и возврат 1
+    if sum_value > 10: # сравнение суммы карт и возврат 1
         return 1
 
     return 0
@@ -90,11 +91,9 @@ def is_blackjack(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand)
     3.  '2' - '10' = numerical value.
     """
+    card_values = (value_of_card(card_one), value_of_card(card_two))
 
-    if ('A' in card_one and value_of_card(card_two) == 10) or ('A' in card_two and value_of_card(card_one) == 10):
-        return True
-        
-    return False
+    return 'A' in (card_one, card_two) and 10 in card_values
 
 
 def can_split_pairs(card_one, card_two):
@@ -104,10 +103,8 @@ def can_split_pairs(card_one, card_two):
     :return: bool - can the hand be split into two pairs? (i.e. cards are of the same value).
     """
 
-    if value_of_card(card_one) == value_of_card(card_two):
-        return True
-        
-    return False
+    return value_of_card(card_one) == value_of_card(card_two)
+
 
 
 def can_double_down(card_one, card_two):
@@ -119,7 +116,4 @@ def can_double_down(card_one, card_two):
 
     value_double_down = [9, 10, 11]
     sum_of_cards = value_of_card(card_one) + value_of_card(card_two)
-    if sum_of_cards in value_double_down:
-        return True
-        
-    return False
+    return sum_of_cards in value_double_down
