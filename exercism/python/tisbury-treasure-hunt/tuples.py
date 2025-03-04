@@ -58,4 +58,8 @@ def clean_up(combined_record_group):
     (see HINTS.md for an example).
     """
 
-    pass
+    result = ""
+    for record in combined_record_group:
+        cleaned_s = (record[0], record[2], record[3], record[4])
+        result += str(cleaned_s) + "\n"
+    return result
