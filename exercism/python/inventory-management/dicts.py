@@ -23,7 +23,13 @@ def add_items(inventory, items):
     :return: dict - the inventory updated with the new items.
     """
 
-    pass
+    for item in items:
+        if item in inventory:
+            inventory[item] += 1
+        else:
+            inventory[item] = 1
+    return inventory
+        
 
 
 def decrement_items(inventory, items):
@@ -34,7 +40,13 @@ def decrement_items(inventory, items):
     :return: dict - updated inventory with items decremented.
     """
 
-    pass
+    for item in items:
+        if item in inventory:
+            if inventory[item] > 0:
+                inventory[item] -= 1
+            else:
+                inventory[item] = 0
+    return inventory
 
 
 def remove_item(inventory, item):
@@ -57,3 +69,27 @@ def list_inventory(inventory):
 
     pass
 
+
+
+
+
+print(add_items({"coal":1}, ["wood", "iron", "coal", "wood"]))
+# {"coal":2, "wood":2, "iron":1}
+
+
+print(add_items({"coal":1}, ["wood", "iron", "coal", "wood"]))
+# {"coal":2, "wood":2, "iron":1}
+
+print(decrement_items({"coal":2, "wood":1, "diamond":2}, ["coal", "coal", "wood", "wood", "diamond"]))
+# {"coal":0, "wood":0, "diamond":1}
+
+
+print(remove_item({"coal":2, "wood":1, "diamond":2}, "coal"))
+# {"wood":1, "diamond":2}
+
+print(remove_item({"coal":2, "wood":1, "diamond":2}, "gold"))
+# {"coal":2, "wood":1, "diamond":2}
+
+
+print(list_inventory({"coal":7, "wood":11, "diamond":2, "iron":7, "silver":0}))
+# [('coal', 7), ('diamond', 2), ('iron', 7), ('wood', 11)]
