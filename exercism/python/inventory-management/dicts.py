@@ -1,3 +1,4 @@
+from collections import Counter
 """Functions to keep track and alter inventory."""
 
 
@@ -8,10 +9,15 @@ def create_inventory(items):
     :return: dict - the inventory dictionary.
     """
 
-    done_dict = {}
-    for item in items:
-        done_dict.setdefault(item, items.count(item))
-    return done_dict
+    return Counter(items)
+    # done_dict = {}
+    # for item in items:
+    #     if item in done_dict:
+    #         done_dict[item] += 1
+    #     else:
+    #         done_dict[item] = 1
+    # #     done_dict.setdefault(item, items.count(item))
+    # return done_dict
 
 
 
@@ -40,12 +46,10 @@ def decrement_items(inventory, items):
     :return: dict - updated inventory with items decremented.
     """
 
+
     for item in items:
         if item in inventory:
-            if inventory[item] > 0:
-                inventory[item] -= 1
-            else:
-                inventory[item] = 0
+            inventory[item] -= 1 if inventory[item] > 0 else 0
     return inventory
 
 
@@ -57,7 +61,8 @@ def remove_item(inventory, item):
     :return: dict - updated inventory with item removed. Current inventory if item does not match.
     """
 
-    pass
+    inventory.pop(item, None)
+    return inventory
 
 
 def list_inventory(inventory):
@@ -67,29 +72,8 @@ def list_inventory(inventory):
     :return: list of tuples - list of key, value pairs from the inventory dictionary.
     """
 
-    pass
-
-
-
-
-
-print(add_items({"coal":1}, ["wood", "iron", "coal", "wood"]))
-# {"coal":2, "wood":2, "iron":1}
-
-
-print(add_items({"coal":1}, ["wood", "iron", "coal", "wood"]))
-# {"coal":2, "wood":2, "iron":1}
-
-print(decrement_items({"coal":2, "wood":1, "diamond":2}, ["coal", "coal", "wood", "wood", "diamond"]))
-# {"coal":0, "wood":0, "diamond":1}
-
-
-print(remove_item({"coal":2, "wood":1, "diamond":2}, "coal"))
-# {"wood":1, "diamond":2}
-
-print(remove_item({"coal":2, "wood":1, "diamond":2}, "gold"))
-# {"coal":2, "wood":1, "diamond":2}
-
-
-print(list_inventory({"coal":7, "wood":11, "diamond":2, "iron":7, "silver":0}))
-# [('coal', 7), ('diamond', 2), ('iron', 7), ('wood', 11)]
+    done_list = []
+    for key, value in inventory.items():
+        if value > 0:
+            done_list.append((key, value))
+    return done_list
