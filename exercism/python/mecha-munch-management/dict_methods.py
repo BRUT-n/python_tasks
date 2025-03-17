@@ -22,7 +22,10 @@ def read_notes(notes):
     :return: dict - a user shopping cart dictionary.
     """
 
-    pass
+    list_of_notes = {}
+    for note in notes:
+        list_of_notes.setdefault(note, 1)
+    return list_of_notes
 
 
 def update_recipes(ideas, recipe_updates):
@@ -33,7 +36,8 @@ def update_recipes(ideas, recipe_updates):
     :return: dict - updated "recipe ideas" dict.
     """
 
-    pass
+    ideas.update(recipe_updates)
+    return ideas
 
 
 def sort_entries(cart):
@@ -43,7 +47,7 @@ def sort_entries(cart):
     :return: dict - users shopping cart sorted in alphabetical order.
     """
 
-    pass
+    return dict(sorted(cart.items()))
 
 
 def send_to_store(cart, aisle_mapping):
@@ -68,9 +72,29 @@ def update_store_inventory(fulfillment_cart, store_inventory):
     pass
 
 
-
+# #task_1
 # print(add_item({'Banana': 3, 'Apple': 2, 'Orange': 1}, ('Apple', 'Apple', 'Orange', 'Apple', 'Banana')))
 # # {'Banana': 4, 'Apple': 5, 'Orange': 2}
+# print(add_item({'Banana': 3, 'Apple': 2, 'Orange': 1}, ['Banana', 'Orange', 'Blueberries', 'Banana']))
+# # {'Banana': 5, 'Apple': 2, 'Orange': 2, 'Blueberries': 1}
 
-print(add_item({'Banana': 3, 'Apple': 2, 'Orange': 1}, ['Banana', 'Orange', 'Blueberries', 'Banana']))
-# {'Banana': 5, 'Apple': 2, 'Orange': 2, 'Blueberries': 1}
+
+# #task_2
+# print(read_notes(('Banana','Apple', 'Orange')))
+# # {'Banana': 1, 'Apple': 1, 'Orange': 1}
+# print(read_notes(['Blueberries', 'Pear', 'Orange', 'Banana', 'Apple']))
+# # {'Blueberries' : 1, 'Pear' : 1, 'Orange' : 1, 'Banana' : 1, 'Apple' : 1}
+
+
+# #task_3
+# print(update_recipes({'Banana Bread' : {'Banana': 1, 'Apple': 1, 'Walnuts': 1, 'Flour': 1, 'Eggs': 2, 'Butter': 1},
+#                     'Raspberry Pie' : {'Raspberry': 1, 'Orange': 1, 'Pie Crust': 1, 'Cream Custard': 1}},
+# (('Banana Bread', {'Banana': 4,  'Walnuts': 2, 'Flour': 1, 'Butter': 1, 'Milk': 2, 'Eggs': 3}),)))
+# ...
+
+# # {'Banana Bread' : {'Banana': 4,  'Apple': 1, 'Walnuts': 2, 'Flour': 1, 'Butter': 1, 'Milk': 2, 'Eggs': 3},
+# #  'Raspberry Pie' : {'Raspberry': 1, 'Orange': 1, 'Pie Crust': 1, 'Cream Custard': 1}}
+
+# # task_4
+# print(sort_entries({'Banana': 3, 'Apple': 2, 'Orange': 1}))
+# # {'Apple': 2, 'Banana':3, 'Orange': 1}
