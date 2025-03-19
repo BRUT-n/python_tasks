@@ -29,9 +29,7 @@ def compare_records(azara_record, rui_record):
     :return: bool - do the coordinates match?
     """
 
-    if list(azara_record[1]) == list(rui_record[1]):
-        return True
-    return False
+    return tuple(azara_record[1]) == rui_record[1]
 
 
 def create_record(azara_record, rui_record):
@@ -60,6 +58,6 @@ def clean_up(combined_record_group):
 
     result = ""
     for record in combined_record_group:
-        cleaned_s = (record[0], record[2], record[3], record[4])
+        cleaned_s = (record[0], *record[2:])
         result += str(cleaned_s) + "\n"
     return result

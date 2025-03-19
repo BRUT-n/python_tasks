@@ -57,8 +57,16 @@ def send_to_store(cart, aisle_mapping):
     :param aisle_mapping: dict - aisle and refrigeration information dictionary.
     :return: dict - fulfillment dictionary ready to send to store.
     """
+    # fulfillment_cart = dict(sorted({}.items())) 
+    fulfillment_cart = {}
+    
+    for item in cart.keys():
+        value = cart[item]
+        aisle_and_refrigeration = aisle_mapping[item]
+        fulfillment_cart[item] = [value, *aisle_and_refrigeration]
 
-    pass
+    return dict(sorted(fulfillment_cart.items(), reverse=True))
+
 
 
 def update_store_inventory(fulfillment_cart, store_inventory):
@@ -98,3 +106,9 @@ def update_store_inventory(fulfillment_cart, store_inventory):
 # # task_4
 # print(sort_entries({'Banana': 3, 'Apple': 2, 'Orange': 1}))
 # # {'Apple': 2, 'Banana':3, 'Orange': 1}
+
+
+# task_5
+print(send_to_store({'Banana': 3, 'Apple': 2, 'Orange': 1, 'Milk': 2},
+                  {'Banana': ['Aisle 5', False], 'Apple': ['Aisle 4', False], 'Orange': ['Aisle 4', False], 'Milk': ['Aisle 2', True]}))
+# {'Orange': [1, 'Aisle 4', False], 'Milk': [2, 'Aisle 2', True], 'Banana': [3, 'Aisle 5', False], 'Apple': [2, 'Aisle 4', False]}
