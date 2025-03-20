@@ -77,8 +77,18 @@ def update_store_inventory(fulfillment_cart, store_inventory):
     :return: dict - store_inventory updated.
     """
 
-    pass
+    for item, value in fulfillment_cart.items():
+        cart_count = fulfillment_cart[item][0]
+        store_count = store_inventory[item][0]
+        result_count = store_count - cart_count
+        if result_count == 0:
+            result_count = "Out of Stock"
+        store_inventory[item][0] = result_count
+    return store_inventory
 
+
+
+#testing
 
 # #task_1
 # print(add_item({'Banana': 3, 'Apple': 2, 'Orange': 1}, ('Apple', 'Apple', 'Orange', 'Apple', 'Banana')))
@@ -109,6 +119,13 @@ def update_store_inventory(fulfillment_cart, store_inventory):
 
 
 # task_5
-print(send_to_store({'Banana': 3, 'Apple': 2, 'Orange': 1, 'Milk': 2},
-                  {'Banana': ['Aisle 5', False], 'Apple': ['Aisle 4', False], 'Orange': ['Aisle 4', False], 'Milk': ['Aisle 2', True]}))
+# print(send_to_store({'Banana': 3, 'Apple': 2, 'Orange': 1, 'Milk': 2},
+#                   {'Banana': ['Aisle 5', False], 'Apple': ['Aisle 4', False], 'Orange': ['Aisle 4', False], 'Milk': ['Aisle 2', True]}))
 # {'Orange': [1, 'Aisle 4', False], 'Milk': [2, 'Aisle 2', True], 'Banana': [3, 'Aisle 5', False], 'Apple': [2, 'Aisle 4', False]}
+
+
+# # task_6
+# print(update_store_inventory({'Orange': [1, 'Aisle 4', False], 'Milk': [2, 'Aisle 2', True], 'Banana': [3, 'Aisle 5', False], 'Apple': [2, 'Aisle 4', False]},
+# {'Banana': [15, 'Aisle 5', False], 'Apple': [12, 'Aisle 4', False], 'Orange': [1, 'Aisle 4', False], 'Milk': [4, 'Aisle 2', True]}))
+
+# # {'Banana': [12, 'Aisle 5', False], 'Apple': [10, 'Aisle 4', False], 'Orange': ['Out of Stock', 'Aisle 4', False], 'Milk': [2, 'Aisle 2', True]}
