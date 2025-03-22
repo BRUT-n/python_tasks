@@ -50,15 +50,20 @@ def extend_route_information(route, more_route_information):
     return extend_info
 
 
-def fix_wagon_depot(wagons_rows):
+def fix_wagon_depot(wagons_rows: list):
     """Fix the list of rows of wagons.
 
     :param wagons_rows: list[list[tuple]] - the list of rows of wagons.
     :return: list[list[tuple]] - list of rows of wagons.
     """
-    pass
-    # a, *rest = zip(*wagons_rows)
-    # print(list(rest))
+    fixed = [list(t) for t in zip(*wagons_rows)] # супер пупер решение которое я не понял
+    return fixed
+
+
+
+
+
+
 
 
 # task_1
