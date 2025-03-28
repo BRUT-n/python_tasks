@@ -38,6 +38,7 @@ def check_drinks(drink_name, drink_ingredients):
 
     if set(drink_ingredients).isdisjoint(ALCOHOLS):
         return f'{drink_name} Mocktail'
+    
     return f'{drink_name} Cocktail'
 
 
@@ -62,6 +63,7 @@ def categorize_dish(dish_name, dish_ingredients):
         return f'{dish_name}: PALEO'
     elif dish_ingredients.issubset(KETO):
         return f'{dish_name}: KETO'
+    
     return f'{dish_name}: OMNIVORE'
 
 
@@ -76,7 +78,7 @@ def tag_special_ingredients(dish):
     SPECIAL_INGREDIENTS constant imported from `sets_categories_data.py`.
     """
 
-    pass
+    return (dish[0], set(dish[1]).intersection(SPECIAL_INGREDIENTS))
 
 
 def compile_ingredients(dishes):
@@ -87,8 +89,9 @@ def compile_ingredients(dishes):
 
     This function should return a `set` of all ingredients from all listed dishes.
     """
+    master_list = set()
 
-    pass
+    return master_list.union(*dishes)
 
 
 def separate_appetizers(dishes, appetizers):
@@ -102,7 +105,7 @@ def separate_appetizers(dishes, appetizers):
     Either list could contain duplicates and may require de-duping.
     """
 
-    pass
+    return list(set(dishes).difference(set(appetizers)))
 
 
 def singleton_ingredients(dishes, intersection):
@@ -120,7 +123,9 @@ def singleton_ingredients(dishes, intersection):
     The function should return a `set` of ingredients that only appear in a single dish.
     """
 
-    pass
+    full = set()
+    full = full.union(*dishes)
+    return intersection.symmetric_difference(full)
 
 
 
@@ -154,10 +159,50 @@ def singleton_ingredients(dishes, intersection):
 # 'Shirley Tonic Cocktail'
 
 # task_3
-print(categorize_dish('Sticky Lemon Tofu', {'tofu', 'soy sauce', 'salt', 'black pepper', 'cornstarch', 'vegetable oil', 'garlic', 'ginger', 'water', 'vegetable stock', 'lemon juice', 'lemon zest', 'sugar'}))
+# print(categorize_dish('Sticky Lemon Tofu', {'tofu', 'soy sauce', 'salt', 'black pepper', 'cornstarch', 'vegetable oil', 'garlic', 'ginger', 'water', 'vegetable stock', 'lemon juice', 'lemon zest', 'sugar'}))
 ...
 # 'Sticky Lemon Tofu: VEGAN'
 
-print(categorize_dish('Shrimp Bacon and Crispy Chickpea Tacos with Salsa de Guacamole', {'shrimp', 'bacon', 'avocado', 'chickpeas', 'fresh tortillas', 'sea salt', 'guajillo chile', 'slivered almonds', 'olive oil', 'butter', 'black pepper', 'garlic', 'onion'}))
+# print(categorize_dish('Shrimp Bacon and Crispy Chickpea Tacos with Salsa de Guacamole', {'shrimp', 'bacon', 'avocado', 'chickpeas', 'fresh tortillas', 'sea salt', 'guajillo chile', 'slivered almonds', 'olive oil', 'butter', 'black pepper', 'garlic', 'onion'}))
 ...
 # 'Shrimp Bacon and Crispy Chickpea Tacos with Salsa de Guacamole: OMNIVORE'
+
+# task_4
+# print(tag_special_ingredients(('Ginger Glazed Tofu Cutlets', ['tofu', 'soy sauce', 'ginger', 'corn starch', 'garlic', 'brown sugar', 'sesame seeds', 'lemon juice'])))
+# ...
+# ('Ginger Glazed Tofu Cutlets', {'garlic','soy sauce','tofu'})
+
+# print(tag_special_ingredients(('Arugula and Roasted Pork Salad', ['pork tenderloin', 'arugula', 'pears', 'blue cheese', 'pine nuts', 'balsamic vinegar', 'onions', 'black pepper'])))
+# ...
+# ('Arugula and Roasted Pork Salad', {'pork tenderloin', 'blue cheese', 'pine nuts', 'onions'})
+
+# task_5
+# dishes = [ {'tofu', 'soy sauce', 'ginger', 'corn starch', 'garlic', 'brown sugar', 'sesame seeds', 'lemon juice'},
+#            {'pork tenderloin', 'arugula', 'pears', 'blue cheese', 'pine nuts',
+#            'balsamic vinegar', 'onions', 'black pepper'},
+#            {'honeydew', 'coconut water', 'mint leaves', 'lime juice', 'salt', 'english cucumber'}]
+
+# print(compile_ingredients(dishes))
+# ...
+# {'arugula', 'brown sugar', 'honeydew', 'coconut water', 'english cucumber', 'balsamic vinegar', 'mint leaves', 'pears', 'pork tenderloin', 'ginger', 'blue cheese', 'soy sauce', 'sesame seeds', 'black pepper', 'garlic', 'lime juice', 'corn starch', 'pine nuts', 'lemon juice', 'onions', 'salt', 'tofu'}
+
+# task_6
+# dishes =    ['Avocado Deviled Eggs','Flank Steak with Chimichurri and Asparagus', 'Kingfish Lettuce Cups',
+#              'Grilled Flank Steak with Caesar Salad','Vegetarian Khoresh Bademjan','Avocado Deviled Eggs',
+#              'Barley Risotto','Kingfish Lettuce Cups']
+          
+# appetizers = ['Kingfish Lettuce Cups','Avocado Deviled Eggs','Satay Steak Skewers',
+#               'Dahi Puri with Black Chickpeas','Avocado Deviled Eggs','Asparagus Puffs',
+#               'Asparagus Puffs']
+              
+# print(separate_appetizers(dishes, appetizers))
+# ...
+# ['Vegetarian Khoresh Bademjan', 'Barley Risotto', 'Flank Steak with Chimichurri and Asparagus', 
+#  'Grilled Flank Steak with Caesar Salad']
+
+# task_7
+# from sets_categories_data import example_dishes, EXAMPLE_INTERSECTION
+
+# print(singleton_ingredients(example_dishes, EXAMPLE_INTERSECTION))
+# ...
+# {'garlic powder', 'sunflower oil', 'mixed herbs', 'cornstarch', 'celeriac', 'honey', 'mushrooms', 'bell pepper', 'rosemary', 'parsley', 'lemon', 'yeast', 'vegetable oil', 'vegetable stock', 'silken tofu', 'tofu', 'cashews', 'lemon zest', 'smoked tofu', 'spaghetti', 'ginger', 'breadcrumbs', 'tomatoes', 'barley malt', 'red pepper flakes', 'oregano', 'red onion', 'fresh basil'}
