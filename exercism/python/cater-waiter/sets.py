@@ -5,7 +5,6 @@ from sets_categories_data import (VEGAN,
                                   VEGETARIAN,
                                   KETO,
                                   PALEO,
-                                  OMNIVORE,
                                   ALCOHOLS,
                                   SPECIAL_INGREDIENTS)
 
@@ -57,11 +56,11 @@ def categorize_dish(dish_name, dish_ingredients):
 
     if dish_ingredients.issubset(VEGAN):
         return f'{dish_name}: VEGAN'
-    elif dish_ingredients.issubset(VEGETARIAN):
+    if dish_ingredients.issubset(VEGETARIAN):
         return f'{dish_name}: VEGETARIAN'
-    elif dish_ingredients.issubset(PALEO):
+    if dish_ingredients.issubset(PALEO):
         return f'{dish_name}: PALEO'
-    elif dish_ingredients.issubset(KETO):
+    if dish_ingredients.issubset(KETO):
         return f'{dish_name}: KETO'
     
     return f'{dish_name}: OMNIVORE'
