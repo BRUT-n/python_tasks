@@ -21,11 +21,11 @@ def read_notes(notes):
     :param notes: iterable of items to add to cart.
     :return: dict - a user shopping cart dictionary.
     """
-
-    list_of_notes = {}
-    for note in notes:
-        list_of_notes.setdefault(note, 1)
-    return list_of_notes
+    return dict.fromkeys(notes, 1)
+    # list_of_notes = {}
+    # for note in notes:
+    #     list_of_notes.setdefault(note, 1)
+    # return list_of_notes
 
 
 def update_recipes(ideas, recipe_updates):
@@ -57,15 +57,21 @@ def send_to_store(cart, aisle_mapping):
     :param aisle_mapping: dict - aisle and refrigeration information dictionary.
     :return: dict - fulfillment dictionary ready to send to store.
     """
-    # fulfillment_cart = dict(sorted({}.items())) 
-    fulfillment_cart = {}
+    # fulfillment_cart = {}
     
-    for item in cart.keys():
-        value = cart[item]
+    # for item in cart.keys():
+    #     value = cart[item]
+    #     aisle_and_refrigeration = aisle_mapping[item]
+    #     fulfillment_cart[item] = [value, *aisle_and_refrigeration]
+
+    # return dict(sorted(fulfillment_cart.items(), reverse=True))
+    
+    fulfillment_cart = {}
+    for item, value in sorted(cart.items(), reverse=True):
         aisle_and_refrigeration = aisle_mapping[item]
         fulfillment_cart[item] = [value, *aisle_and_refrigeration]
 
-    return dict(sorted(fulfillment_cart.items(), reverse=True))
+    return fulfillment_cart
 
 
 
