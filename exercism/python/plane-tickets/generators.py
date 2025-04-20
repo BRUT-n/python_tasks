@@ -1,7 +1,7 @@
 """Functions to automate Conda airlines ticketing system."""
 
 
-def generate_seat_letters(number):
+def generate_seat_letters(number: int):
     """Generate a series of letters for airline seats.
 
     :param number: int - total number of seat letters to be generated.
@@ -14,14 +14,18 @@ def generate_seat_letters(number):
 
     """
 
-    number = int(number)
-    seat_letters = ["A", "B", "C", "D"]
-    while number >= 1:
-        for seat in seat_letters:
-            yield seat
-            number -= 1
-            if number == 0:
-                break
+    # seat_letters = ["A", "B", "C", "D"]
+    # while number >= 1:
+    #     for seat in seat_letters:
+    #         yield seat
+    #         number -= 1
+    #         if number == 0:
+    #             break
+
+    seat_letters = "ABCD"
+    for i in range(number):
+        yield seat_letters[i % 4]
+
 
 
 def generate_seats(number):
@@ -41,18 +45,28 @@ def generate_seats(number):
 
     """
 
-    number = int(number) # кол-во мест
-    row_numbers = 0 # нулевой ряд
-    seats_letters = ["A", "B", "C", "D"]
-    while number >= 1:
-        row_numbers += 1
+    # number = int(number)  # кол-во мест
+    # row_numbers = 0  # нулевой ряд
+    # seats_letters = ["A", "B", "C", "D"]
+    # while number >= 1:
+    #     row_numbers += 1
+    #     if row_numbers == 13:
+    #         row_numbers += 1
+    #     for seat in seats_letters:
+    #         yield f"{row_numbers}{seat}"
+    #         number -= 1
+    #         if number == 0:
+    #             break
+
+    row_numbers = 0  # нулевой ряд
+    seats_letters = generate_seat_letters(number)
+    for i, s in enumerate(seats_letters):
+        if i % 4 == 0:
+            row_numbers += 1
         if row_numbers == 13:
             row_numbers += 1
-        for seat in seats_letters:
-            yield f"{row_numbers}{seat}"
-            number -= 1
-            if number == 0:
-                break
+        yield f"{row_numbers}{s}"
+
 
 
 def assign_seats(passengers):
@@ -65,13 +79,15 @@ def assign_seats(passengers):
 
     """
 
-    generated_seats = generate_seats(len(passengers))
-    names_and_seats = {}
-    for name in passengers:
-        names_and_seats[name] = next(generated_seats)
-    return names_and_seats
+    # generated_seats = generate_seats(len(passengers))
+    # names_and_seats = {}
+    # for name in passengers:
+    #     names_and_seats[name] = next(generated_seats)
+    # return names_and_seats
 
-    
+    return {name: seat for name, seat in zip(passengers, generate_seats(len(passengers)))}
+
+
 def generate_codes(seat_numbers, flight_id):
     """Generate codes for a ticket.
 
@@ -81,35 +97,37 @@ def generate_codes(seat_numbers, flight_id):
 
     """
 
+    # for seat in seat_numbers:
+    #     result = seat + flight_id
+    #     if len(result) < 12:
+    #         result = result + "0" * (12 - len(result))
+    #         yield result
+
     for seat in seat_numbers:
-        result = seat + flight_id
-        if len(result) < 12:
-            result = result + "0" * (12 - len(result))
-            yield result
+        yield f"{seat}{flight_id}".ljust(12, "0")
 
-
-#output tests
-#task_1
+# output tests
+# task_1
 # letters = generate_seat_letters(4)
 # print(next(letters))
 # "A"
 # print(next(letters))
 # "B"
 
-#task_2
+# task_2
 # seats = generate_seats(10)
 # print(next(seats))
 # "1A"
 # print(next(seats))
 # "1B"
 
-#task_3
+# task_3
 # passengers = ['Jerimiah', 'Eric', 'Bethany', 'Byte', 'SqueekyBoots', 'Bob']
 
 # print(assign_seats(passengers))
 # {'Jerimiah': '1A', 'Eric': '1B', 'Bethany': '1C', 'Byte': '1D', 'SqueekyBoots': '2A', 'Bob': '2B'}
 
-#task_4
+# task_4
 # seat_numbers = ['1A', '17D']
 # flight_id = 'CO1234'
 # ticket_ids = generate_codes(seat_numbers, flight_id)
