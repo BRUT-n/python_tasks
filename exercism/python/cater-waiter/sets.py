@@ -76,8 +76,8 @@ def tag_special_ingredients(dish):
     For the purposes of this exercise, all allergens or special ingredients that need to be tracked are in the
     SPECIAL_INGREDIENTS constant imported from `sets_categories_data.py`.
     """
-
-    return (dish[0], set(dish[1]).intersection(SPECIAL_INGREDIENTS))
+    name, ingredient = dish
+    return name, set(ingredient).intersection(SPECIAL_INGREDIENTS)
 
 
 def compile_ingredients(dishes):
@@ -88,9 +88,9 @@ def compile_ingredients(dishes):
 
     This function should return a `set` of all ingredients from all listed dishes.
     """
-    master_list = set()
+    # master_list = set()
 
-    return master_list.union(*dishes)
+    return set.union(*dishes)
 
 
 def separate_appetizers(dishes, appetizers):
@@ -122,8 +122,7 @@ def singleton_ingredients(dishes, intersection):
     The function should return a `set` of ingredients that only appear in a single dish.
     """
 
-    full = set()
-    full = full.union(*dishes)
+    full = set.union(*dishes)
     return intersection.symmetric_difference(full)
 
 

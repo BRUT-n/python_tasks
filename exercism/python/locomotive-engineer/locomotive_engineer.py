@@ -18,10 +18,10 @@ def fix_list_of_wagons(each_wagons_id, missing_wagons):
     :return: list - list of wagons.
     """
     a, b, c, *part_of_id = each_wagons_id
-    print(a, b, c, part_of_id)
-    fix_list = c, *missing_wagons, *part_of_id, a, b
+    # print(a, b, c, part_of_id)
+    # fix_list = c, *missing_wagons, *part_of_id, a, b
 
-    return list(fix_list)
+    return [c, *missing_wagons, *part_of_id, a, b]
 
 
 def add_missing_stops(route: dict, **stops):
@@ -31,10 +31,10 @@ def add_missing_stops(route: dict, **stops):
     :param: arbitrary number of stops.
     :return: dict - updated route dictionary.
     """
-    lst_stops = []
-    for value in stops.values():
-        lst_stops.append(value)
-    route["stops"] = lst_stops
+    # lst_stops = []
+    # lst_stops = [value for value in stops.values()]:
+    #     lst_stops.append(value)
+    route["stops"] = [value for value in stops.values()]
 
     return route
         
@@ -46,8 +46,8 @@ def extend_route_information(route, more_route_information):
     :param more_route_information: dict -  extra route information.
     :return: dict - extended route information.
     """
-    extend_info = {**route, **more_route_information}
-    return extend_info
+    # extend_info = {**route, **more_route_information}
+    return {**route, **more_route_information}
 
 
 def fix_wagon_depot(wagons_rows: list):
@@ -56,9 +56,15 @@ def fix_wagon_depot(wagons_rows: list):
     :param wagons_rows: list[list[tuple]] - the list of rows of wagons.
     :return: list[list[tuple]] - list of rows of wagons.
     """
-    fixed = [list(t) for t in zip(*wagons_rows)] # супер пупер решение которое я не понял
-    return fixed
+    # fixed = [list(t) for t in zip(*wagons_rows)] # супер пупер решение которое я не понял
+    # return fixed
 
+    [*first_row], [*second_row], [*third_row] = zip(*wagons_rows) 
+    print(first_row)
+    print(second_row)
+    print(third_row)
+
+    return [first_row, second_row, third_row]
 
 
 
@@ -85,11 +91,11 @@ def fix_wagon_depot(wagons_rows: list):
 # output: {"from": "Berlin", "to": "Hamburg", "length": "100", "speed": "50"}
 
 # task_6
-fix_wagon_depot([
-                [(2, "red"), (4, "red"), (8, "red")],
-                [(5, "blue"), (9, "blue"), (13,"blue")],
-                [(3, "orange"), (7, "orange"), (11, "orange")],
-                ])
+# fix_wagon_depot([
+#                 [(2, "red"), (4, "red"), (8, "red")],
+#                 [(5, "blue"), (9, "blue"), (13,"blue")],
+#                 [(3, "orange"), (7, "orange"), (11, "orange")],
+#                 ])
 
 # [
 # [(2, "red"), (5, "blue"), (3, "orange")],
