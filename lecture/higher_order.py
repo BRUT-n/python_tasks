@@ -38,3 +38,20 @@ def make_greeter(name = "stranger"):
 vasya = make_greeter("Vasya")
 anon = make_greeter()
 
+
+def make_counter():
+    start = 0
+    def f():
+        nonlocal start
+        start += 1
+        return start
+    return f
+
+
+
+counter = make_counter()
+
+print(counter()) # 1
+print(counter()) # 2
+print(counter()) # 3
+print(counter()) # 4
