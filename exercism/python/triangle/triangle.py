@@ -3,13 +3,18 @@ def equilateral(sides):
 
 def isosceles(sides):
     a, b, c = sides
-    if a + b >= c and b + c >= a and a + c >= b: # условие того что может быть треугольником
-        return a == b or a == c or b == c
-    return False
+    return is_triangle(a, b, c) and (a == b or a == c or b == c)
+    # if a + b >= c and b + c >= a and a + c >= b: # условие того что может быть треугольником
+    #     return a == b or a == c or b == c
+    # return False
 
 
 def scalene(sides):
     a, b, c = sides
-    if a + b >= c and b + c >= a and a + c >= b: # условие того что может быть треугольником
-        return a != b and a != c and b != c
-    return False
+    return is_triangle(a, b, c) and a != b and a != c and b != c
+    # if a + b >= c and b + c >= a and a + c >= b: # условие того что может быть треугольником
+    #     return a != b and a != c and b != c
+    # return False
+
+def is_triangle(a, b, c):
+    return a + b >= c and b + c >= a and a + c >= b
