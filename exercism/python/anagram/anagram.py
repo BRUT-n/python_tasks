@@ -11,14 +11,6 @@ def find_anagrams(word, candidates):
 # expected = ["ΒΓΑ", "γβα"]
 # print(find_anagrams("ΑΒΓ", candidates)) #, expected)
 
-# candidates = ["Banana"]
-# expected = []
-# print(find_anagrams("BANANA", candidates)) #, expected)
-
-# candidates = ["banana"]
-# expected = []
-# print(find_anagrams("BANANA", candidates)) #, expected)
-
 greek = [ord(a) for a in "γβα"]
 rus = [ord(r) for r in "гва"]
 print(sorted("γβα"))
