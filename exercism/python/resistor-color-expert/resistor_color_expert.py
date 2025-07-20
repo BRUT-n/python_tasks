@@ -24,9 +24,9 @@ TOLERANCE_CODE = {
 
 def conversion_ohms(value):
     converted_ohms = "ohms"
-    # if value >= 1000000000:
-    #     converted_ohms = "gigaohms" # нет в тестах таких
-    #     value = value / 1000000000
+    if value >= 1000000000:
+        converted_ohms = "gigaohms" # в тестах нет таких единиц
+        value = value / 1000000000
     if value >= 1000000:
         converted_ohms = "megaohms"
         value = value / 1000000
@@ -37,20 +37,37 @@ def conversion_ohms(value):
         value = int(value)
     return f"{value} {converted_ohms}"
 
+# def calculation_of_resistance(colors):
+#     result = ""
+#     if len(colors) == 4:
+#         two_colors = colors[:2]
+#         for name in two_colors:
+#             value = COLOR_CODE[name]
+#             result += str(value)
+#         return int(result) * 10 ** (COLOR_CODE[colors[2]]) # по правилу 4 цвета вычисляются - умножить на 10 в степени (по коду цвета)
+#     if len(colors) == 5:
+#         three_colors = colors[:3]
+#         for name in three_colors:
+#             value = COLOR_CODE[name]
+#             result += str(value)
+#         return int(result) * 10 ** (COLOR_CODE[colors[3]]) # по правилу 5 цветов вычисляются - умножить на 10 в степени (по коду цвета)
+
+# убрать дублирование кода в функции выше
+
 def calculation_of_resistance(colors):
+    '''
+    Исключено дублирование кода
+    '''
     result = ""
-    if len(colors) == 4:
-        two_colors = colors[:2]
-        for name in two_colors:
-            value = COLOR_CODE[name]
-            result += str(value)
-        return int(result) * 10 ** (COLOR_CODE[colors[2]]) # по правилу 4 цвета вычисляются - умножить на 10 в степени (по коду цвета)
-    if len(colors) == 5:
-        three_colors = colors[:3]
-        for name in three_colors:
-            value = COLOR_CODE[name]
-            result += str(value)
-        return int(result) * 10 ** (COLOR_CODE[colors[3]]) # по правилу 5 цветов вычисляются - умножить на 10 в степени (по коду цвета)
+    colors_len = len(colors)
+    if colors_len == 4:
+        color_index = 2
+    if colors_len == 5:
+        color_index = 3
+    for name in colors[:color_index]:
+        value = COLOR_CODE[name]
+        result += str(value)
+    return int(result) * 10 ** (COLOR_CODE[colors[color_index]]) # по правилу 4 цвета вычисляются - умножить на 10 в степени (по коду цвета)
 
 def resistor_label(colors):
     if colors[0] == "black":

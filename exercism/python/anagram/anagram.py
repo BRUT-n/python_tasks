@@ -7,6 +7,8 @@ def find_anagrams(word, candidates):
             word_list.append(item)
     return word_list
 
+# swapcase или через словари или через сеиы
+
 # candidates = ["ΒΓΑ", "ΒΓΔ", "γβα", "αβγ"]
 # expected = ["ΒΓΑ", "γβα"]
 # print(find_anagrams("ΑΒΓ", candidates)) #, expected)

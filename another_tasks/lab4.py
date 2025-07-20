@@ -109,38 +109,69 @@
 #     return fib
 # ==============
 
-def fibonacci_not_rec(number):
-    if number <= 2:
-        return 1
-    else:
-        i = 0
-        first_num = 0
-        second_num = 1
-        while i != number - 1:
-             sum_num = first_num + second_num
-             first_num = second_num
-             second_num = sum_num
-             i += 1
-        return sum_num
+# def fibonacci_not_rec(number):
+#     if number <= 2:
+#         return 1
+#     else:
+#         i = 0
+#         first_num = 0
+#         second_num = 1
+#         while i != number - 1:
+#              sum_num = first_num + second_num
+#              first_num = second_num
+#              second_num = sum_num
+#              i += 1
+#         return sum_num
 
-print(fibonacci_not_rec(1))
+def fibonacci_not_rec(number):
+    if number == 0:
+        return 0
+    first = 0
+    second = 1
+    sum = 1
+    for i in range(1, number):
+        sum = first + second
+        first = second
+        second = sum
+    return sum
+
+for g in range(11):
+    print(g, fibonacci_not_rec(g))
+
+# print(fibonacci_not_rec(1))
+
+# def closure(): # функция-замыкание
+#     def fibonacci_not_rec(number): # вложенная в замыкание функция для Фибоначчи
+#         if number <= 2: # если требуется вывести первое или второе число - это 1
+#             sum_num = 1
+#             return sum_num
+#         else:
+#             i = 0 # счетчик итераций для расчета чисел по порядку
+#             first_num = 0 # первое число 0 по списку чисел
+#             second_num = 1 # второе число 1 по списку чисел
+#             while i != number - 1: # пока количество итераций не равно номеру числа по порядку
+#                 sum_num = first_num + second_num # вычисляется сумма чисел первого и второго
+#                 first_num = second_num # обновляем первое число сделав его вторым
+#                 second_num = sum_num # второе число делаем вычисленным числом (по определению Фибоначчи)
+#                 i += 1 # увеличиваем счетчик инераций
+#             return sum_num # возвращаем полученный результат после цикла
+#     return fibonacci_not_rec # возвращаем внутреннюю функцию для работы самого замыкания
+
 
 def closure(): # функция-замыкание
-    def fibonacci_not_rec(number): # вложенная в замыкание функция для Фибоначчи
-        if number <= 2: # если требуется вывести первое или второе число - это 1
-            sum_num = 1
-            return sum_num
-        else:
-            i = 0 # счетчик итераций для расчета чисел по порядку
-            first_num = 0 # первое число 0 по списку чисел
-            second_num = 1 # второе число 1 по списку чисел
-            while i != number - 1: # пока количество итераций не равно номеру числа по порядку
-                sum_num = first_num + second_num # вычисляется сумма чисел первого и второго
-                first_num = second_num # обновляем первое число сделав его вторым
-                second_num = sum_num # второе число делаем вычисленным числом (по определению Фибоначчи)
-                i += 1 # увеличиваем счетчик инераций
-            return sum_num # возвращаем полученный результат после цикла
-    return fibonacci_not_rec # возвращаем внутреннюю функцию для работы самого замыкания 
+    def fibonacci_not_rec(number):
+        if number == 0:
+            return 0
+        first = 0
+        second = 1
+        sum = 1
+        for i in range(1, number):
+            sum = first + second
+            first = second
+            second = sum
+        return sum
+    return fibonacci_not_rec # возвращаем внутреннюю функцию для работы самого замыкания
+
 
 
 c1 = closure() # замыкание для дальнейшего использования

@@ -35,7 +35,6 @@ print(recite(3, 3))
             "and a Partridge in a Pear Tree."
 '''
 
-
 # def recite(start_verse, end_verse):
 #     lyrics = []
 #     gifts_from_first_day = []
