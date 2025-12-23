@@ -36,4 +36,3 @@ def encode(string):
 
 print(encode("  hsqq qww  ")) #, "2 hs2q q2w2 ")
 print(encode("aabbbcccc")) #, "2a3b4c")
-

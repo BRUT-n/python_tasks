@@ -1,3 +1,0 @@
-pytest 
-pytest-cache
-pytest-subtests

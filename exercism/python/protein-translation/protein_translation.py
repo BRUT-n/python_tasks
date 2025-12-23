@@ -17,6 +17,7 @@ TRANSLATE_TABLE = {
     "UAG" : "STOP",
     "UGA" : "STOP"
 }
+ # перевернуть словарь и переписать под него
 
 def spliting(text):
     return [text[i: i + 3] for i in range(0, len(text), 3)]
@@ -33,3 +34,4 @@ def proteins(strand):
 value = "UGGUAG"
 expected = ["Tryptophan"]
 print(proteins(value)) #, expected)
+
